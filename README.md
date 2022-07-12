@@ -1,24 +1,66 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Users テーブル
 
-Things you may want to cover:
+| Column             | Type    | Options                   |
+| ------------------ | --------| ------------------------- |
+| nickname           | string  | null: false               |
+| email              | string  | null: false               |
+| password           | string  | null: false               |
+| family_name        | string  | null: false               |
+| first_name         | string  | null: false               |
+| family_name_kana   | string  | null: false               |
+| first_name_kana    | string  | null: false               |
+| birth_day          | date    | null: false               |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :items
+- has_many :logs
 
-* Configuration
+## Items テーブル
 
-* Database creation
+| Column             | Type    | Options                   |
+| ------------------ | ------- | ------------------------- |
+| name               | string  | null: false               |
+| introduction       | text    | null: false               |
+| price              | integer | null: false               |
+| condition          | integer | null: false               |
+| preparation_day    | integer | null: false               |
+| postage_type       | integer | null: false               |
+| category           | integer | null: false               |
+| image              | text    | null: false               |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- belongs_to :Users
+- has_one :logs
 
-* Services (job queues, cache servers, search engines, etc.)
+## Logd テーブル
 
-* Deployment instructions
+| Column             | Type       | Options                      |
+| ------------------ | ---------- | ---------------------------- |
+| user_id            | references | null:false/foreign_key: true |
+| items_id           | references | null:false/foreign_key: true |
 
-* ...
+
+### Association
+
+- belongs_to :Users
+- has_one :Items
+
+## Destinations テーブル
+
+| Column             | Type    | Options                   |
+| ------------------ | ------- | ------------------------- |
+| post_code          | string  | null: false               |
+| prefecture         | string  | null: false               |
+| city               | string  | null: false               |
+| address            | string  | null: false               |
+| building_name      | integer |                           |
+| phone_number       | integer | null: false               |
+
+
+### Association
+
+- has_one :logs
