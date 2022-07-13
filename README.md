@@ -21,7 +21,6 @@
 
 | Column             | Type      | Options                       |
 | ------------------ | --------- | ----------------------------- |
-| image              | text      | null: false                   |
 | name               | string    | null: false                   |
 | introduction       | text      | null: false                   |
 | price              | integer   | null: false                   |
@@ -34,27 +33,23 @@
 
 ### Association
 
-- belongs_to :User
-- has_one :logs
-- belongs_to_active_hash :condition_id
-- belongs_to_active_hash :preparation_day_id
-- belongs_to_active_hash :prefecture_id
-- belongs_to_active_hash :postage_type_id
-- belongs_to_active_hash :category_id
+- has_one :user
+- has_one :log
+
 
 ## Logs テーブル
 
 | Column             | Type       | Options                      |
 | ------------------ | ---------- | ---------------------------- |
 | user               | references | null:false/foreign_key: true |
-| item_id            | references | null:false/foreign_key: true |
+| item               | references | null:false/foreign_key: true |
 
 
 ### Association
 
-- belongs_to :User
-- belongs_to :Item
-- has_one :Destinations
+- belongs_to :user
+- has_one :item
+- has_one :destination
 
 ## Destinations テーブル
 
