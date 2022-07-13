@@ -6,7 +6,6 @@
 | ------------------ | --------| ------------------------- |
 | nickname           | string  | null: false               |
 | email              | string  | null: false               |
-| password           | string  | null: false               |
 | family_name        | string  | null: false               |
 | first_name         | string  | null: false               |
 | family_name_kana   | string  | null: false               |
@@ -20,47 +19,55 @@
 
 ## Items テーブル
 
-| Column             | Type    | Options                   |
-| ------------------ | ------- | ------------------------- |
-| name               | string  | null: false               |
-| introduction       | text    | null: false               |
-| price              | integer | null: false               |
-| condition          | integer | null: false               |
-| preparation_day    | integer | null: false               |
-| postage_type       | integer | null: false               |
-| category           | integer | null: false               |
-| image              | text    | null: false               |
+| Column             | Type      | Options                       |
+| ------------------ | --------- | ----------------------------- |
+| image              | text      | null: false                   |
+| name               | string    | null: false                   |
+| introduction       | text      | null: false                   |
+| price              | integer   | null: false                   |
+| condition_id       | integer   | null: false                   |
+| preparation_day_id | integer   | null: false                   |
+| prefecture_id      | integer   | null: false                   |
+| postage_type_id    | integer   | null: false                   |
+| category_id        | integer   | null: false                   |
+| user               | reference | null: false/foreign_key: true |
 
 ### Association
 
-- belongs_to :Users
+- belongs_to :User
 - has_one :logs
+- belongs_to_active_hash :condition_id
+- belongs_to_active_hash :preparation_day_id
+- belongs_to_active_hash :prefecture_id
+- belongs_to_active_hash :postage_type_id
+- belongs_to_active_hash :category_id
 
 ## Logs テーブル
 
 | Column             | Type       | Options                      |
 | ------------------ | ---------- | ---------------------------- |
-| user_id            | references | null:false/foreign_key: true |
-| item_id           | references | null:false/foreign_key: true |
+| user               | references | null:false/foreign_key: true |
+| item_id            | references | null:false/foreign_key: true |
 
 
 ### Association
 
-- belongs_to :Users
-- has_one :Items
+- belongs_to :User
+- belongs_to :Item
+- has_one :Destinations
 
 ## Destinations テーブル
 
-| Column             | Type    | Options                   |
-| ------------------ | ------- | ------------------------- |
-| post_code          | string  | null: false               |
-| prefecture         | string  | null: false               |
-| city               | string  | null: false               |
-| address            | string  | null: false               |
-| building_name      | integer |                           |
-| phone_number       | integer | null: false               |
-
+| Column             | Type       | Options                      |
+| ------------------ | ---------- | ---------------------------- |
+| post_code          | string     | null: false                  |
+| prefecture         | integer    | null: false                  |
+| city               | string     | null: false                  |
+| address            | string     | null: false                  |
+| building_name      | integer    |                              |
+| phone_number       | integer    | null: false                  |
+| logs               | references | null:false/foreign_key: true |
 
 ### Association
 
-- has_one :logs
+- belongs_to :log
