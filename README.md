@@ -6,6 +6,7 @@
 | ------------------ | --------| ------------------------- |
 | nickname           | string  | null: false               |
 | email              | string  | null: false               |
+| encrypted_password | string  | null: false               |
 | family_name        | string  | null: false               |
 | first_name         | string  | null: false               |
 | family_name_kana   | string  | null: false               |
@@ -47,7 +48,7 @@
 
 ### Association
 
-- belongs_to :user
+- has_one :user
 - has_one :item
 - has_one :destination
 
@@ -56,12 +57,12 @@
 | Column             | Type       | Options                      |
 | ------------------ | ---------- | ---------------------------- |
 | post_code          | string     | null: false                  |
-| prefecture         | integer    | null: false                  |
+| prefecture_id      | integer    | null: false                  |
 | city               | string     | null: false                  |
 | address            | string     | null: false                  |
-| building_name      | integer    |                              |
-| phone_number       | integer    | null: false                  |
-| logs               | references | null:false/foreign_key: true |
+| building_name      | string     |                              |
+| phone_number       | string     | null: false                  |
+| log                | references | null:false/foreign_key: true |
 
 ### Association
 
