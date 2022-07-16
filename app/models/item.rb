@@ -3,12 +3,13 @@ class Item < ApplicationRecord
   #has_one :log
   has_one_attached :image
 
-  
-  validates :category_id, numericality: { other_than: 1 , message: "Category can't be blank"}
-  validates :prefecture_id, numericality: { other_than: 1 , message: "Prefecture can't be blank"}
-  validates :postage_type_id, numericality: { other_than: 1 , message: "Shipping fee status can't be blank"}
-  validates :condition_id, numericality: { other_than: 1 , message: "Sales status can't be blank"}
-  validates :preparation_day_id, numericality: { other_than: 1 , message: "Scheduled delivery can't be blank"}
+
+  validates :category_id, numericality: { other_than: 1 , message: " can't be blank"}
+  validates :prefecture_id, numericality: { other_than: 1 , message: " can't be blank"}
+  validates :postage_type_id, numericality: { other_than: 1 , message: " can't be blank"}
+  validates :condition_id, numericality: { other_than: 1 , message: " can't be blank"}
+  validates :preparation_day_id, numericality: { other_than: 1 , message: " can't be blank"}
+  validates :price,numericality: { in: 300..9_999_999, message: " is out of setting range" }
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
