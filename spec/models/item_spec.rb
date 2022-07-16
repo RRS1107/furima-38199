@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   before do
     @item = FactoryBot.build(:item)
-    @user = FactoryBot.build(:user)
   end
 
   describe '出品機能' do
@@ -63,6 +62,22 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is out of setting range","Price is invalid. Input half-width characters")
       end
+      it 'priceが299以下だと出品できない' do
+        @item.price = "200"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is out of setting range")
+      end
+      it 'priceが10,000,000以上だと出品できない' do
+        @item.price = "100000000"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is out of setting range")
+      end
+      it 'userが紐付いていなければ保存できない' do
+        @item.user = "nil"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
+      end
     end
   end
 end
+
