@@ -27,7 +27,9 @@ class ItemsController < ApplicationController
     @prefecture = Prefecture.find_by(id:@prefecture_id)
     @postage_type = PostageType.find_by(id:@postage_type_id)
     @preparatio_nday = PreparationDay.find_by(id:@preparation_day)
+  end
 
+  def edit
   end
 
   private
