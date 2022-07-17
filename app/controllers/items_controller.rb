@@ -21,12 +21,7 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    @user  = User.all
-    @category = Category.find_by(id:@category_id)
-    @condition = Condition.find_by(id:@condition_id)
-    @prefecture = Prefecture.find_by(id:@prefecture_id)
-    @postage_type = PostageType.find_by(id:@postage_type_id)
-    @preparatio_nday = PreparationDay.find_by(id:@preparation_day)
+
   end
 
   def edit
