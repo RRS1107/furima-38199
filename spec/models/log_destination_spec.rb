@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe LogDestination, type: :model do
   before do
-    @log_destination = FactoryBot.build(:log_destination)
+    user = FactoryBot.create(:user)
+    item = FactoryBot.create(:item)
+    @log_destination = FactoryBot.build(:log_destination, user_id:user.id, item_id: item.id)
   end
 
   describe '配送先情報の保存' do

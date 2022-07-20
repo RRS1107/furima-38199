@@ -1,16 +1,13 @@
 class LogsController < ApplicationController
   before_action :authenticate_user!
   before_action :move_to_index, only: [:index, :create]
-
+  before_action :find_params, only:[:index, :create]
 
   def index
-    @item = Item.find(params[:item_id])
     @log_destination = LogDestination.new
-    
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @log_destination = LogDestination.new(destination_params)
     if @log_destination.valid?
        pay_item
@@ -25,6 +22,10 @@ class LogsController < ApplicationController
 
   def destination_params
     params.require(:log_destination).permit(:post_code, :prefecture_id, :city, :address, :building_name, :phone_number).merge(user_id: current_user.id, item_id: @item.id, token: params[:token])
+  end
+
+  def find_params
+    @item = Item.find(params[:id])
   end
 
   def pay_item
