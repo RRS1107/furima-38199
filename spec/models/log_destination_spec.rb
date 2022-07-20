@@ -5,6 +5,7 @@ RSpec.describe LogDestination, type: :model do
     user = FactoryBot.create(:user)
     item = FactoryBot.create(:item)
     @log_destination = FactoryBot.build(:log_destination, user_id:user.id, item_id: item.id)
+    sleep 0.1
   end
 
   describe '配送先情報の保存' do
@@ -92,6 +93,11 @@ RSpec.describe LogDestination, type: :model do
         @log_destination.valid?
         expect(@log_destination.errors.full_messages).to include("Phone number can't be blank")
       end
+      it '電話番号が9桁以下では購入できない' do
+        @log_destination.phone_number = '123456789'
+        @log_destination.valid?
+        expect(@log_destination.errors.full_messages).to include("Phone number is too short")
+      end
       it '電話番号にハイフンがあると保存できないこと' do
         @log_destination.phone_number = '123 - 1234 - 1234'
         @log_destination.valid?
@@ -104,7 +110,7 @@ RSpec.describe LogDestination, type: :model do
       end
       it 'トークンが空だと保存できないこと' do
         @log_destination.token = nil
-        @log_destinationm.valid?
+        @log_destination.valid?
         expect(@log_destination.errors.full_messages).to include("Token can't be blank")
       end
     end
