@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
 
   before_action :authenticate_user!, only:[:new, :edit]
-  before_action :find_params, only:[:show, :edit, :update, :create,]
-  before_action :prevent_url, only: [:edit, :update]
+  before_action :find_params, only:[:show, :edit, :update, :destroy, :create]
+  before_action :prevent_url, only: [:edit, :update, :destroy]
   before_action :move_to_index, only: [:edit]
 
   def index
