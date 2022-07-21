@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
 
   before_action :authenticate_user!, only:[:new, :edit]
-  before_action :prevent_url, only: [:edit, :update, :destroy]
-  before_action :find_params, only:[:show, :edit, :update, :destroy]
+  before_action :find_params, only:[:show, :edit, :update, :create,]
+  before_action :prevent_url, only: [:edit, :update]
   before_action :move_to_index, only: [:edit]
 
   def index
@@ -14,7 +14,6 @@ class ItemsController < ApplicationController
   end
   
   def create
-    @item = Item.new(item_params)
     if @item.save
       redirect_to root_path
     else
@@ -26,7 +25,6 @@ class ItemsController < ApplicationController
   end
   
   def edit
-    @item = Item.find(params[:id])
   end
 
   def update

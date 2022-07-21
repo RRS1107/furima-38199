@@ -61,7 +61,7 @@ RSpec.describe LogDestination, type: :model do
       it '郵便番号が空だと保存できないこと' do
         @log_destination.post_code = nil
         @log_destination.valid?
-        expect(@log_destination.errors.full_messages).to include("Post code can't be blank", 'Post code is invalid. Include hyphen(-)')
+        expect(@log_destination.errors.full_messages).to include("Post code can't be blank")
       end
       it '郵便番号にハイフンがないと保存できないこと' do
         @log_destination.post_code = 1_234_567

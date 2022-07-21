@@ -1,7 +1,8 @@
 class LogsController < ApplicationController
   before_action :authenticate_user!
-  before_action :move_to_index, only: [:index, :create]
   before_action :find_params, only:[:index, :create]
+  before_action :move_to_index, only: [:index, :create]
+  
 
   def index
     @log_destination = LogDestination.new
@@ -38,7 +39,6 @@ class LogsController < ApplicationController
   end
 
   def move_to_index
-    @item = Item.find(params[:item_id])
     redirect_to root_path if current_user.id == @item.user_id || @item.log.present?
   end
 
