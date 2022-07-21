@@ -62,6 +62,6 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    redirect_to root_path if current_user.id == @item.user_id || @item.log.present?
+    redirect_to root_path if  @item.log.present?
   end
 end
