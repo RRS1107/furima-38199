@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 
   before_action :authenticate_user!, only:[:new, :edit]
-  before_action :find_params, only:[:show, :edit, :update, :destroy, :create]
+  before_action :find_params, only:[:show, :edit, :update, :destroy]
   before_action :prevent_url, only: [:edit, :update, :destroy]
   before_action :move_to_index, only: [:edit]
 
@@ -14,6 +14,7 @@ class ItemsController < ApplicationController
   end
   
   def create
+    @item = Item.new(item_params)
     if @item.save
       redirect_to root_path
     else
