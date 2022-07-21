@@ -96,7 +96,7 @@ RSpec.describe LogDestination, type: :model do
       it '電話番号が9桁以下では購入できない' do
         @log_destination.phone_number = '123456789'
         @log_destination.valid?
-        expect(@log_destination.errors.full_messages).to include("Phone number is too short")
+        expect(@log_destination.errors.full_messages).to include("Phone number is invalid")
       end
       it '電話番号にハイフンがあると保存できないこと' do
         @log_destination.phone_number = '123 - 1234 - 1234'
